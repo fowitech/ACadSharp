@@ -24,4 +24,18 @@ public class DwgReaderConfiguration : CadReaderConfiguration
 	/// default: true
 	/// </value>
 	public bool ReadSummaryInfo { get; set; } = true;
+
+	/// <summary>
+	/// Optional sink that receives every entity as soon as it is read, before the document is built.
+	/// </summary>
+	/// <remarks>
+	/// If the sink returns true the entity is consumed: it is not added to the document, so very large
+	/// files can be processed without holding all their entities in memory. Entities consumed this way
+	/// are missing from the resulting <see cref="CadDocument"/>; tables and block records are still built.
+	/// Block begin and end markers are never offered to the sink.
+	/// </remarks>
+	/// <value>
+	/// default: null
+	/// </value>
+	public Func<DwgStreamedEntity, bool> EntitySink { get; set; }
 }

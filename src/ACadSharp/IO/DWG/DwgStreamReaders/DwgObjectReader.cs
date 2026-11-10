@@ -183,6 +183,9 @@ namespace ACadSharp.IO.DWG
 				if (template == null)
 					continue;
 
+				if (this.offerToEntitySink(template))
+					continue;
+
 				this._builder.AddTemplate(template);
 			}
 		}
